@@ -3,7 +3,7 @@ import 'package:youtube/widgets/video_player_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const String apiKey = 'AIzaSyD1JgGbCT01psk7hYJka38gzcMy-tV5fIg';
+const String apiKey = 'AIzaSyBZpfqE8d0jc1uisyTc0DWLj0x-33L02hI';
 
 class ShortsScreen extends StatefulWidget {
   const ShortsScreen({super.key});
@@ -56,13 +56,18 @@ class _ShortsScreenState extends State<ShortsScreen> {
               scrollDirection: Axis.vertical,
               itemCount: videoList.length,
               itemBuilder: (context, index) {
-                return VideoPlayerScreen(
-                  videoUrl:
-                      'https://www.youtube.com/watch?v=${videoList[index]["videoId"]}',
-                  title: videoList[index]["title"]!,
-                  artist: '', // เพิ่มข้อมูลศิลปินถ้ามี
-                );
-              },
+  String title = videoList[index]["title"] ?? "Unknown Title";
+  String artist = videoList[index].containsKey("artist") 
+                  ? videoList[index]["artist"]! 
+                  : "Unknown Artist";
+
+  return VideoPlayerScreen(
+    videoUrl: 'https://www.youtube.com/watch?v=${videoList[index]["videoId"]}',
+    title: title,
+    artist: artist,
+  );
+}
+,
             ),
     );
   }

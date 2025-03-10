@@ -25,8 +25,8 @@ class MusicPage extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                _buildAlbum("WORTH IT!", "Hatsune Miku", "assets/miku1.jpg"),
-                _buildAlbum("I NEVER KNEW", "Hatsune Miku", "assets/miku2.jpg"),
+                _buildAlbum("APT.", "ROSÉ และ Bruno", "assets/rose.jpg"),
+                _buildAlbum("Die With A Smile", "Lady Gaga", "assets/ladygaga.jpg"),
               ],
             ),
           ),

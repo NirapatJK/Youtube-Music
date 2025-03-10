@@ -54,17 +54,28 @@ class _MusicHomePageState extends State<MusicHomePage> {
                 final song = songs[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => VideoPlayerScreen(
-                          videoUrl: song['videoId']!,
-                          title: song['title']!,
-                          artist: song['artist'] ?? "Unknown Artist",
-                        ),
-                      ),
-                    );
-                  },
+  String title = song['title'] ?? "Unknown Title";
+  String artist = song.containsKey('artist') ? song['artist']! : "Unknown Artist";
+  
+  String? videoId = song['videoId'];
+  if (videoId == null || videoId.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('ไม่สามารถโหลดวิดีโอได้'))
+    );
+    return;
+  }
+  
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => VideoPlayerScreen(
+        videoUrl: 'https://www.youtube.com/watch?v=$videoId',
+        title: title,
+        artist: artist,
+      ),
+    ),
+  );
+},
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
